@@ -22,3 +22,16 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
+/vendor
+/node_modules
+/.idea
+/.vscode
+/.env
+/public/storage
+/storage/*.key
+.env.backup
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+.phpunit.result.cache
