@@ -15,9 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('description');
             $table->string('title');
-            $able->float('rate');
+            $table->float('rate');
             $table->string('duration')->nullable();
             
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('age')->nullable();
             $table->string('nationality')->nullable();
             
+            $table->softDeletes();
             $table->timestamps();
         });
     }
