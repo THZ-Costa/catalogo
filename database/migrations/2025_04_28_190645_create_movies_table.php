@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('title');
             $table->float('rate');
             $table->string('duration')->nullable();
+            $table->string('link')->nullable();
             
             $table->softDeletes();
             $table->timestamps();
