@@ -4,11 +4,7 @@ use App\Http\Controllers\MovieController;
 use App\Http\Controllers\StarController;
 use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
-Route::get('/', function () {
-    return Inertia::render('Welcome');
-})->name('home');
 
 Route::prefix('movies')->group(function () {
     Route::get('/', [MovieController::class, 'index']);          // Listar todos
@@ -33,10 +29,3 @@ Route::prefix('tags')->group(function () {
     Route::put('/{id}', [TagController::class, 'update']);   
     Route::delete('/{id}', [TagController::class, 'destroy']); 
 });
-
-Route::get('dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-require __DIR__.'/settings.php';
-require __DIR__.'/auth.php';

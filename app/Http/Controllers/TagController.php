@@ -9,6 +9,7 @@ use App\Services\ResponseService;
 use App\Services\TagService;
 use Exception;
 use Illuminate\Http\Response;
+use Inertia\Inertia;
 
 class TagController extends Controller
 {
@@ -28,7 +29,10 @@ class TagController extends Controller
     {
         try {
             $tags = $this->service->listTags();
-            return $this->response->success($tags, Response::HTTP_OK);
+
+            return Inertia::render('Tags/Index', [
+                'tags' => $tags
+            ]);
         } catch (Exception $e) {
             return $this->response->error('Erro ao listar Tag.', Response::HTTP_INTERNAL_SERVER_ERROR, $e->getMessage());
         }

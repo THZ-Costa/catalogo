@@ -10,6 +10,7 @@ use App\Services\ResponseService;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Exception;
+use Inertia\Inertia;
 
 class MovieController extends Controller
 {
@@ -28,8 +29,13 @@ class MovieController extends Controller
     public function index()
     {
         try {
+            info('aqui');
             $movies = $this->service->listMovies();
-            return $this->response->success($movies, Response::HTTP_OK);
+            
+            return Inertia::render('Movies/Index', [
+                'movies' => $movies
+            ]);
+
         } catch (Exception $e) {
             return $this->response->error('Erro ao listar filmes.', Response::HTTP_INTERNAL_SERVER_ERROR, $e->getMessage());
         }

@@ -9,6 +9,7 @@ use App\Services\ResponseService;
 use App\Services\StarService;
 use Exception;
 use Illuminate\Http\Response;
+use Inertia\Inertia;
 
 class StarController extends Controller
 {
@@ -28,7 +29,11 @@ class StarController extends Controller
     {
         try {
             $stars = $this->service->listStars();
-            return $this->response->success($stars, Response::HTTP_OK);
+
+            return Inertia::render('Stars/Index', [
+                'Stars' => $stars
+            ]);
+
         } catch (Exception $e) {
             return $this->response->error('Erro ao listar filmes.', Response::HTTP_INTERNAL_SERVER_ERROR, $e->getMessage());
         }

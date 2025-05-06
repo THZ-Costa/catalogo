@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('resume')->nullable();
             $table->integer('age')->nullable();
             $table->string('nationality')->nullable();
+            $table->string('photo');
             
             $table->softDeletes();
             $table->timestamps();
