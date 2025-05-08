@@ -17,6 +17,7 @@ class MovieRepository
 
     public function create(array $data)
     {
+        info('repoitory');
         return Movie::create($data);
     }
 

@@ -7,6 +7,32 @@ import { createApp, h } from 'vue';
 import { ZiggyVue } from 'ziggy-js';
 import { initializeTheme } from './composables/useAppearance';
 
+// FontAwesome imports
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import {
+    faPlus,
+    faEdit,
+    faTrash,
+    faArrowLeft,
+    faArrowRight,
+    faSearch,
+    faTimes,
+    faSave
+} from '@fortawesome/free-solid-svg-icons';
+
+// Adiciona os ícones na biblioteca
+library.add(
+    faPlus,
+    faEdit,
+    faTrash,
+    faArrowLeft,
+    faArrowRight,
+    faSearch,
+    faTimes,
+    faSave
+);
+
 // Extend ImportMeta interface for Vite...
 declare module 'vite/client' {
     interface ImportMetaEnv {
@@ -24,11 +50,13 @@ const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
-    resolve: (name) => resolvePageComponent(`./pages/${name}.vue`, import.meta.glob<DefineComponent>('./pages/**/*.vue')),
+    resolve: (name) =>
+        resolvePageComponent(`./pages/${name}.vue`, import.meta.glob<DefineComponent>('./pages/**/*.vue')),
     setup({ el, App, props, plugin }) {
         createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(ZiggyVue)
+            .component('font-awesome-icon', FontAwesomeIcon) // registra componente global
             .mount(el);
     },
     progress: {

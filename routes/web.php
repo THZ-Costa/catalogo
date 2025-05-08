@@ -12,7 +12,7 @@ Route::get('/', function () {
 
 Route::prefix('movies')->group(function () {
     Route::get('/', [MovieController::class, 'index']);          // Listar todos
-    Route::post('/', [MovieController::class, 'store']);         // Criar novo
+    Route::post('/movies', [MovieController::class, 'store'])->name('movies.store');        // Criar novo
     Route::get('/{id}', [MovieController::class, 'show']);       // Buscar por ID
     Route::put('/{id}', [MovieController::class, 'update']);     // Atualizar
     Route::delete('/{id}', [MovieController::class, 'destroy']); // Remover (soft delete)

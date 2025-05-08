@@ -7,11 +7,11 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::prefix('movies')->group(function () {
-    Route::get('/', [MovieController::class, 'index']);          // Listar todos
-    Route::post('/', [MovieController::class, 'store']);         // Criar novo
-    Route::get('/{id}', [MovieController::class, 'show']);       // Buscar por ID
-    Route::put('/{id}', [MovieController::class, 'update']);     // Atualizar
-    Route::delete('/{id}', [MovieController::class, 'destroy']); // Remover (soft delete)
+    Route::get('/', [MovieController::class, 'index']);          
+    Route::post('/movies', [MovieController::class, 'store'])->name('movies.store');
+    Route::get('/{id}', [MovieController::class, 'show']);       
+    Route::put('/{id}', [MovieController::class, 'update']);     
+    Route::delete('/{id}', [MovieController::class, 'destroy']); 
 });
 
 Route::prefix('stars')->group(function () {

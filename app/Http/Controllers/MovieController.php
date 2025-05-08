@@ -29,7 +29,6 @@ class MovieController extends Controller
     public function index()
     {
         try {
-            info('aqui');
             $movies = $this->service->listMovies();
             
             return Inertia::render('Movies/Index', [
@@ -47,9 +46,18 @@ class MovieController extends Controller
     public function store(StoreMovieRequest $request)
     {
         try {
+            info('Movie store');
+            info(json_encode($request->all()));
+
             $movie = $this->service->createMovie($request->validated());
+
+            if ($request->hasFile('photo')) {
+                $validated['photo'] = $request->file('photo')->store('movies', 'public');
+            }
             return $this->response->success($movie, Response::HTTP_CREATED);
         } catch (Exception $e) {
+            info('erro');
+            info($e->getMessage());
             return $this->response->error('Erro ao criar filme.', Response::HTTP_INTERNAL_SERVER_ERROR, $e->getMessage());
         }
     }

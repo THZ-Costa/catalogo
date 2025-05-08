@@ -25,6 +25,7 @@ class MovieService
 
     public function createMovie(array $data)
     {
+        info('service');
         return $this->repository->create($data);
     }
 
