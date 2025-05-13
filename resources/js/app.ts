@@ -7,6 +7,9 @@ import { createApp, h } from 'vue';
 import { ZiggyVue } from 'ziggy-js';
 import { initializeTheme } from './composables/useAppearance';
 
+import Toast, { POSITION } from 'vue-toastification';
+import 'vue-toastification/dist/index.css';
+
 // FontAwesome imports
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
@@ -56,6 +59,7 @@ createInertiaApp({
         createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(ZiggyVue)
+            .use(Toast, { position: POSITION.TOP_RIGHT })
             .component('font-awesome-icon', FontAwesomeIcon) // registra componente global
             .mount(el);
     },

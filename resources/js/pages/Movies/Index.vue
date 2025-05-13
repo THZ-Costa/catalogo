@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
+import { router } from '@inertiajs/vue3';
 import { Head } from '@inertiajs/vue3';
 import { ref } from 'vue';
 import Modal from '@/components/ui/dialog/Modal.vue';
@@ -17,6 +18,11 @@ const breadcrumbs: BreadcrumbItem[] = [
   { title: 'Dashboard', href: '/dashboard' },
   { title: 'Filmes', href: '/movies' },
 ];
+
+const handleSuccess = () => {
+  showModal.value = false;
+  router.reload({ only: ['movies'] });
+};
 
 defineProps<{
   movies: any[]
@@ -45,7 +51,7 @@ defineProps<{
     <!-- modal -->
     <Modal :show="showModal" @close="showModal = false">
       <h2 class="text-xl font-semibold mb-4">Adicionar Filme</h2>
-      <MovieForm />
+      <MovieForm @success="handleSuccess" @close="showModal = false" />
     </Modal>
   </AppLayout>
 </template>

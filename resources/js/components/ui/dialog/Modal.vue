@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-
 
 const props = defineProps<{
   show: boolean;
@@ -16,6 +14,7 @@ const emit = defineEmits(['close'])
       <div class="flex items-center justify-between mb-4">
         <h2 class="text-xl font-bold">{{ title }}</h2>
         <button @click="$emit('close')" class="text-gray-500 hover:text-gray-900">X</button>
+        <Button label="Cancelar" icon="xmark" @click="$emit('close')" />
       </div>
       <div>
         <!-- slot para conteúdo personalizado -->

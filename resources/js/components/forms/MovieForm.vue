@@ -3,12 +3,17 @@ import { ref } from 'vue';
 import Button from '@/components/ui/button/Button.vue';
 import axios from 'axios';
 
+import { useToast } from 'vue-toastification'
+
+
 const title = ref('');
 const rate = ref('');
 const duration = ref('');
 const description = ref('');
 const photo = ref<File | null>(null);
 const link = ref('');
+const toast = useToast()
+const emit = defineEmits(['close', 'saved', 'success']);
 
 const handlePhotoChange = (event: Event) => {
   const target = event.target as HTMLInputElement;
@@ -41,15 +46,19 @@ const submit = async () => {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
+    })
+      .then(response => {
+      toast.success('Filme cadastrado com sucesso!');
+      //emit('saved', response.data); // emite evento com filme salvo
+      emit('success');
+      emit('close');
     });
-
-    // opcional: emitir evento pra fechar modal ou dar reload
   } catch (error) {
+
+    toast.error('Ocorreu um erro ao salvar.')
     console.error(error);
   }
 };
-
-const emit = defineEmits(['close'])
 
 </script>
 
